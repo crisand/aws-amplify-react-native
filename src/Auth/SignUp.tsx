@@ -255,24 +255,26 @@ export default class SignUp extends AuthPiece<ISignUpProps, ISignUpState> {
           <View style={theme.sectionBody}>
             {this.signUpFields.map(field => {
               return field.key !== 'phone_number' ? (
-                <FormField
-                  key={field.key}
-                  isHidden={field.isHidden}
-                  theme={theme}
-                  defaultValue={field.defaultValue}
-                  // @ts-ignore
-                  type={field.type}
-                  secureTextEntry={field.type === 'password'}
-                  onChangeText={text => {
-                    const stateObj = this.state;
-                    stateObj[field.key] = text;
-                    this.setState(stateObj);
-                  }}
-                  label={I18n.get(field.label)}
-                  placeholder={I18n.get(field.placeholder)}
-                  required={field.required}
-                  {...setTestId(field.testID)}
-                />
+                {
+                  field.isHidden ? null : <FormField
+                    key={field.key}
+                    isHidden={field.isHidden}
+                    theme={theme}
+                    defaultValue={field.defaultValue}
+                    // @ts-ignore
+                    type={field.type}
+                    secureTextEntry={field.type === 'password'}
+                    onChangeText={text => {
+                      const stateObj = this.state;
+                      stateObj[field.key] = text;
+                      this.setState(stateObj);
+                    }}
+                    label={I18n.get(field.label)}
+                    placeholder={I18n.get(field.placeholder)}
+                    required={field.required}
+                    {...setTestId(field.testID)}
+                  />
+                }
               ) : (
                 <PhoneField
                   theme={theme}
