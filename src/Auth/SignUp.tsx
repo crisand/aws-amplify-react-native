@@ -50,6 +50,7 @@ interface ISignUpProps extends IAuthPieceProps {
 
 interface ISignUpState extends IAuthPieceState {
   password?: string | null;
+  picture?: string | "-";
 }
 
 export default class SignUp extends AuthPiece<ISignUpProps, ISignUpState> {
@@ -254,7 +255,7 @@ export default class SignUp extends AuthPiece<ISignUpProps, ISignUpState> {
           </Header>
           <View style={theme.sectionBody}>
             {this.signUpFields.map(field => {
-              return field.key !== 'phone_number' ? <FormField
+              return field.key !== 'phone_number' ? (field.isHidden ? null : <FormField
                 key={field.key}
                 isHidden={field.isHidden}
                 theme={theme}
@@ -271,7 +272,7 @@ export default class SignUp extends AuthPiece<ISignUpProps, ISignUpState> {
                 placeholder={I18n.get(field.placeholder)}
                 required={field.required}
                 {...setTestId(field.testID)}
-              /> : (
+              />) : (
                 <PhoneField
                   theme={theme}
                   key={field.key}

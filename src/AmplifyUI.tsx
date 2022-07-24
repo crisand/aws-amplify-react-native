@@ -59,7 +59,6 @@ export const FormField: FC<IFormFieldProps> = (props) => {
         {props.label} {props.required ? '*' : ''}
       </Text>
       <TextInput
-        value={props.defaultValue}
         style={theme.input}
         autoCapitalize="none"
         autoCorrect={false}
