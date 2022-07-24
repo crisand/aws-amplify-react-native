@@ -62,7 +62,7 @@ export default class SignUp extends AuthPiece<ISignUpProps, ISignUpState> {
     super(props);
 
     this._validAuthStates = ['signUp'];
-    this.state = {};
+    this.state = { picture: "-" };
     this.signUp = this.signUp.bind(this);
     this.sortFields = this.sortFields.bind(this);
     this.getDefaultDialCode = this.getDefaultDialCode.bind(this);
@@ -193,7 +193,7 @@ export default class SignUp extends AuthPiece<ISignUpProps, ISignUpState> {
     const signup_info = {
       username: this.state.username,
       password: this.state.password,
-      attributes: {},
+      attributes: { picture: "-" },
     };
 
     const inputKeys = Object.keys(this.state);
