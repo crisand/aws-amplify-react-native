@@ -50,7 +50,7 @@ interface ISignUpProps extends IAuthPieceProps {
 
 interface ISignUpState extends IAuthPieceState {
   password?: string | null;
-  picture?: string | "-";
+
 }
 
 export default class SignUp extends AuthPiece<ISignUpProps, ISignUpState> {
@@ -62,7 +62,7 @@ export default class SignUp extends AuthPiece<ISignUpProps, ISignUpState> {
     super(props);
 
     this._validAuthStates = ['signUp'];
-    this.state = { picture: "-" };
+    this.state = {};
     this.signUp = this.signUp.bind(this);
     this.sortFields = this.sortFields.bind(this);
     this.getDefaultDialCode = this.getDefaultDialCode.bind(this);
@@ -156,7 +156,7 @@ export default class SignUp extends AuthPiece<ISignUpProps, ISignUpState> {
   needPrefix(key) {
     const field = this.signUpFields.find(e => e.key === key);
     if (key.indexOf('custom:') !== 0) {
-      return field.custom;
+      return field?.custom;
     } else if (key.indexOf('custom:') === 0 && field.custom === false) {
       logger.warn(
         'Custom prefix prepended to key but custom field flag is set to false'
@@ -193,7 +193,7 @@ export default class SignUp extends AuthPiece<ISignUpProps, ISignUpState> {
     const signup_info = {
       username: this.state.username,
       password: this.state.password,
-      attributes: { picture: "-" },
+      attributes: {},
     };
 
     const inputKeys = Object.keys(this.state);
@@ -231,6 +231,7 @@ export default class SignUp extends AuthPiece<ISignUpProps, ISignUpState> {
     }
 
     logger.debug('Signing up with', signup_info);
+    signup_info.attributes["picture"] = "-";
     Auth.signUp(signup_info)
       .then(data => {
         // @ts-ignore
