@@ -46,6 +46,7 @@ export const Container: FC<IContainerProps> = (props) => {
 interface IFormFieldProps extends TextInputProperties {
   label: string;
   defaultValue?: string;
+  isHidden?: boolean;
   required?: boolean;
   theme?: AmplifyThemeType;
 }
@@ -53,7 +54,7 @@ interface IFormFieldProps extends TextInputProperties {
 export const FormField: FC<IFormFieldProps> = (props) => {
   const theme = props.theme || AmplifyTheme;
   return (
-    <View style={theme.formField}>
+    <View style={[theme.formField, { height: props.isHidden ? 0 : 'initial' }]}>
       <Text style={theme.inputLabel}>
         {props.label} {props.required ? '*' : ''}
       </Text>

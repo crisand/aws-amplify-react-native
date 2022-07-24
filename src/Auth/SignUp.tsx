@@ -254,9 +254,10 @@ export default class SignUp extends AuthPiece<ISignUpProps, ISignUpState> {
           </Header>
           <View style={theme.sectionBody}>
             {this.signUpFields.map(field => {
-              return field.key !== 'phone_number' && !field.isHidden ? (
+              return field.key !== 'phone_number' ? (
                 <FormField
                   key={field.key}
+                  isHidden={field.isHidden}
                   theme={theme}
                   defaultValue={field.defaultValue}
                   // @ts-ignore
